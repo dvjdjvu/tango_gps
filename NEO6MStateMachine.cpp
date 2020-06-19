@@ -36,9 +36,11 @@
 //================================================================
 //  States  |  Description
 //================================================================
-//  ON      |  
-//  OFF     |  
+//  CLOSE   |  
 //  FAULT   |  
+//  OFF     |  
+//  ON      |  
+//  OPEN    |  
 
 
 namespace NEO6M_ns
@@ -83,6 +85,21 @@ bool NEO6M::is_gps_array_allowed(TANGO_UNUSED(Tango::AttReqType type))
 //=================================================
 //		Commands Allowed Methods
 //=================================================
+
+//--------------------------------------------------------
+/**
+ *	Method      : NEO6M::is_GPSArray_allowed()
+ *	Description : Execution allowed for GPSArray attribute
+ */
+//--------------------------------------------------------
+bool NEO6M::is_GPSArray_allowed(TANGO_UNUSED(const CORBA::Any &any))
+{
+	//	Not any excluded states for GPSArray command.
+	/*----- PROTECTED REGION ID(NEO6M::GPSArrayStateAllowed) ENABLED START -----*/
+	
+	/*----- PROTECTED REGION END -----*/	//	NEO6M::GPSArrayStateAllowed
+	return true;
+}
 
 
 /*----- PROTECTED REGION ID(NEO6M::NEO6MStateAllowed.AdditionalMethods) ENABLED START -----*/

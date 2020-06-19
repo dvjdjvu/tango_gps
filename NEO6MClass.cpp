@@ -148,6 +148,23 @@ NEO6MClass *NEO6MClass::instance()
 //===================================================================
 //	Command execution method calls
 //===================================================================
+//--------------------------------------------------------
+/**
+ * method : 		GPSArrayClass::execute()
+ * description : 	method to trigger the execution of the command.
+ *
+ * @param	device	The device on which the command must be executed
+ * @param	in_any	The command input data
+ *
+ *	returns The command output data (packed in the Any object)
+ */
+//--------------------------------------------------------
+CORBA::Any *GPSArrayClass::execute(Tango::DeviceImpl *device, TANGO_UNUSED(const CORBA::Any &in_any))
+{
+	cout2 << "GPSArrayClass::execute(): arrived" << endl;
+	return insert((static_cast<NEO6M *>(device))->gpsarray());
+}
+
 
 //===================================================================
 //	Properties management
@@ -443,6 +460,15 @@ void NEO6MClass::command_factory()
 	
 	/*----- PROTECTED REGION END -----*/	//	NEO6MClass::command_factory_before
 
+
+	//	Command GPSArray
+	GPSArrayClass	*pGPSArrayCmd =
+		new GPSArrayClass("GPSArray",
+			Tango::DEV_VOID, Tango::DEVVAR_CHARARRAY,
+			"",
+			"",
+			Tango::OPERATOR);
+	command_list.push_back(pGPSArrayCmd);
 
 	/*----- PROTECTED REGION ID(NEO6MClass::command_factory_after) ENABLED START -----*/
 	

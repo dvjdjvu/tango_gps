@@ -81,6 +81,33 @@ public:
 };
 
 
+//=========================================
+//	Define classes for commands
+//=========================================
+//	Command GPSArray class definition
+class GPSArrayClass : public Tango::Command
+{
+public:
+	GPSArrayClass(const char   *name,
+	               Tango::CmdArgType in,
+				   Tango::CmdArgType out,
+				   const char        *in_desc,
+				   const char        *out_desc,
+				   Tango::DispLevel  level)
+	:Command(name,in,out,in_desc,out_desc, level)	{};
+
+	GPSArrayClass(const char   *name,
+	               Tango::CmdArgType in,
+				   Tango::CmdArgType out)
+	:Command(name,in,out)	{};
+	~GPSArrayClass() {};
+	
+	virtual CORBA::Any *execute (Tango::DeviceImpl *dev, const CORBA::Any &any);
+	virtual bool is_allowed (Tango::DeviceImpl *dev, const CORBA::Any &any)
+	{return (static_cast<NEO6M *>(dev))->is_GPSArray_allowed(any);}
+};
+
+
 /**
  *	The NEO6MClass singleton definition
  */

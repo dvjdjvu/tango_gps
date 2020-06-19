@@ -170,6 +170,14 @@ public:
 
 //	Command related methods
 public:
+	/**
+	 *	Command GPSArray related method
+	 *	Description: 
+	 *
+	 *	@returns 
+	 */
+	virtual Tango::DevVarCharArray *gpsarray();
+	virtual bool is_GPSArray_allowed(const CORBA::Any &any);
 
 
 	//--------------------------------------------------------

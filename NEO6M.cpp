@@ -52,6 +52,7 @@
 //================================================================
 //  State         |  Inherited (no method)
 //  Status        |  Inherited (no method)
+//  GPSArray      |  gpsarray
 //================================================================
 
 //================================================================
@@ -316,6 +317,30 @@ void NEO6M::add_dynamic_attributes()
 
 //--------------------------------------------------------
 /**
+ *	Command GPSArray related method
+ *	Description: 
+ *
+ *	@returns 
+ */
+//--------------------------------------------------------
+Tango::DevVarCharArray *NEO6M::gpsarray()
+{
+	Tango::DevVarCharArray *argout;
+	DEBUG_STREAM << "NEO6M::GPSArray()  - " << device_name << endl;
+	/*----- PROTECTED REGION ID(NEO6M::gpsarray) ENABLED START -----*/
+	
+	//	Add your own code
+	argout = new Tango::DevVarCharArray();
+        bool b = false;
+        
+        argout->length (this->gps.size());
+        argout->replace(this->gps.size(), this->gps.size(), (unsigned char*) this->gps.c_str(), b);
+        
+	/*----- PROTECTED REGION END -----*/	//	NEO6M::gpsarray
+	return argout;
+}
+//--------------------------------------------------------
+/**
  *	Method      : NEO6M::add_dynamic_commands()
  *	Description : Create the dynamic commands if any
  *                for specified device.
@@ -333,6 +358,25 @@ void NEO6M::add_dynamic_commands()
 /*----- PROTECTED REGION ID(NEO6M::namespace_ending) ENABLED START -----*/
 
 //	Additional Methods
+// //--------------------------------------------------------
+// /**
+//  *	Command GPSString related method
+//  *	Description: 
+//  *
+//  *	@returns 
+//  */
+// //--------------------------------------------------------
+// Tango::DevString NEO6M::gpsstring()
+// {
+// 	Tango::DevString argout;
+// 	DEBUG_STREAM << "NEO6M::GPSString()  - " << device_name << endl;
+// 	
+// 	//	Add your own code
+// 	argout = this->gps;
+//         
+// 	return argout;
+// }
+
 
 /*----- PROTECTED REGION END -----*/	//	NEO6M::namespace_ending
 } //	namespace
